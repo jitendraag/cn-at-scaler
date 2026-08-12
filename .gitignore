@@ -1,0 +1,12 @@
+echo_server
+echo_server_persistent
+echo_server_fork
+sigpipe_server
+sigpipe_client
+sigpipe_client_dns
+sigpipe_client_getaddrinfo
+
+*.pcap
+*.o
+*.out
+a.out
