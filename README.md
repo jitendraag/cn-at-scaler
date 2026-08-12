@@ -4,7 +4,7 @@ Small, self-contained C socket programs for exploring basic TCP server
 patterns and signal behavior. Each file is deliberately minimal — no error
 handling, no CLI flags — just enough code to demonstrate one concept.
 
-All servers listen on port **2026**.
+All servers listen on port **2026**. Source files live in `lesson1/`.
 
 ## Echo servers
 
@@ -17,6 +17,7 @@ All servers listen on port **2026**.
 Build and run any of them, e.g.:
 
 ```sh
+cd lesson1
 gcc -o echo_server_fork echo_server_fork.c
 ./echo_server_fork
 ```
@@ -39,6 +40,7 @@ socket the peer has already reset.
   modern, protocol-independent replacement for `gethostbyname()`).
 
 ```sh
+cd lesson1
 gcc -o sigpipe_server sigpipe_server.c
 gcc -o sigpipe_client sigpipe_client.c
 ./sigpipe_server &
