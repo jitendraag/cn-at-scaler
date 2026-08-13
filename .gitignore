@@ -5,6 +5,10 @@ sigpipe_server
 sigpipe_client
 sigpipe_client_dns
 sigpipe_client_getaddrinfo
+bcd
+base64
+tlv
+asn1_der
 
 *.pcap
 *.o

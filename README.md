@@ -49,6 +49,23 @@ wait
 echo $?   # 141 = 128 + SIGPIPE(13)
 ```
 
+## Encoding samples
+
+Small standalone programs demonstrating common wire-encoding schemes. Source
+files live in `lesson2/`.
+
+| File | Behavior |
+|---|---|
+| `bcd.c` | Packs decimal digits 2-per-byte (BCD), pads an odd trailing digit with nibble `0xF`, decodes back. |
+| `base64.c` | Standard base64 encode/decode using the RFC 4648 alphabet. |
+| `tlv.c` | Generic 1-byte type / 1-byte length / value encode and decode. |
+| `asn1_der.c` | Minimal DER encoder: an `INTEGER` (tag `0x02`, showing the leading-`0x00` rule when the high bit is set) nested inside a `SEQUENCE` (tag `0x30`). |
+
+```sh
+cd lesson2
+gcc -o bcd bcd.c && ./bcd
+```
+
 ## Notes
 
 This code intentionally skips error handling and return-value checks to stay
