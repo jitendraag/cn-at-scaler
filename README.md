@@ -51,8 +51,7 @@ echo $?   # 141 = 128 + SIGPIPE(13)
 
 ## Encoding samples
 
-Small standalone programs demonstrating common wire-encoding schemes. Source
-files live in `lesson2/`.
+Small standalone programs demonstrating common wire-encoding schemes.
 
 | File | Behavior |
 |---|---|
@@ -62,7 +61,7 @@ files live in `lesson2/`.
 | `asn1_der.c` | Minimal DER encoder: an `INTEGER` (tag `0x02`, showing the leading-`0x00` rule when the high bit is set) nested inside a `SEQUENCE` (tag `0x30`). |
 
 ```sh
-cd lesson2
+cd lesson1
 gcc -o bcd bcd.c && ./bcd
 ```
 
