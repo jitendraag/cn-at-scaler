@@ -4,8 +4,8 @@ Small, self-contained C socket programs for exploring basic TCP server
 patterns and signal behavior. Each file is deliberately minimal — no error
 handling, no CLI flags — just enough code to demonstrate one concept.
 
-All servers listen on port **2026**. Source files live in `lesson1/`, numbered
-in demo order.
+All servers listen on port **2026**. Source files live in `lesson1/` and
+`lesson3/`, numbered in demo order within each directory.
 
 ## Echo servers
 
@@ -24,6 +24,36 @@ gcc -o 03_echo_server_fork 03_echo_server_fork.c
 ```
 
 Then connect with `nc localhost 2026`.
+
+## Select loop
+
+| File | Behavior |
+|---|---|
+| `01_echo_server_select.c` | Handles multiple clients concurrently like the fork server, but in a single process: one `select()` loop multiplexes the listening socket and every connected client, dispatching reads as each fd becomes ready. |
+
+```sh
+cd lesson3
+gcc -o 01_echo_server_select 01_echo_server_select.c
+./01_echo_server_select
+```
+
+### fork vs. select
+
+Both `lesson1/03_echo_server_fork.c` and `lesson3/01_echo_server_select.c`
+serve multiple clients at once, but take opposite approaches:
+
+- **fork**: the OS gives each client its own process (own memory, own file
+  descriptor table). Concurrency comes from the kernel scheduler running
+  many processes; the server code itself stays single-connection and
+  blocking.
+- **select**: there is only ever one process. It keeps an array of client
+  fds and asks the kernel, via `select()`, which ones are readable *right
+  now*. The loop never blocks on any single client — it blocks once on
+  "any of these fds," then services whichever are ready before looping
+  again.
+
+Try connecting 3+ clients to each and watch `ps`/`top`: the fork server
+grows a process per client, the select server stays at one.
 
 ## SIGPIPE demo
 
